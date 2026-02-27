@@ -1,17 +1,28 @@
 @echo off
-echo Setting up the Game..
-:: Checking to see if Python is installed
-python --version >nul 2>&1
-if %errorlevel% neq 0 (
-    echo Python is not installed. Please install Python to run the game.
-    echo Please install python from https://www.python.org and click add check "Add Python to PATH" during installation.
-    pause
-    exit
+echo Checking for Python...
+:: Try the Python Launcher first (works even if PATH was unchecked)
+py --version >nul 2>&1
+if %errorlevel% equ 0 (
+    set PY_CMD=py
+    goto :START_GAME
 )
-echo Python is installed. Downloading dependencies...
-(Pygame)....
-python -m pip install pygame
 
-Echo All dependencies are installed. Starting the game...
-python gun_fighter.py
+:: Try standard python command
+python --version >nul 2>&1
+if %errorlevel% equ 0 (
+    set PY_CMD=python
+    goto :START_GAME
+)
+
+echo.
+echo ERROR: Python not found! 
+echo Please install it from python.org and check "Add to PATH".
+pause
+exit
+
+:START_GAME
+echo Installing Game Engine (Pygame)...
+%PY_CMD% -m pip install pygame
+echo Starting Gun Fighter...
+%PY_CMD% gun_fighter.py
 pause
