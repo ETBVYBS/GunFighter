@@ -21,7 +21,7 @@ jobs:
       - name: Build EXE
         run: |
           pip install pyinstaller
-          pyinstaller --onefile --windowed --name "Gunfighter" main.py
+          pyinstaller --onefile --windowed --name "Gunfighter" gun_fighter.py
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
