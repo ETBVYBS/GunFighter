@@ -1441,6 +1441,6 @@ class Game:
         pygame.display.flip()
 
 if __name__ == "__main__":
-    game = Game(800, 600)
+    game = Game(1200, 1000)
     game.run()
     pygame.quit()
